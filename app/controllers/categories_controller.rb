@@ -1,9 +1,24 @@
 class CategoriesController < ApplicationController
 
   def index
-    @company = Company.find(params[:company_id])
-    @jobs = Job.all
+    @categories = Category.all
   end
+
+
+  def new
+    @category = Category.new
+  end
+
+  def create
+    @category = Category.new(categories_params)
+    if @category.save
+      flash[:success] = "You created a #{@category.title}!"
+      redirect_to category_path(@category)
+    else
+      render :new
+    end
+  end
+
 
   def show
     @category = Category.find(params[:id])
@@ -11,21 +26,26 @@ class CategoriesController < ApplicationController
 
 
   def edit
-    #if category exists, return to edit page
-    #else go to show
+    @category = Category.find(params[:id])
   end
 
-  def new
-    @category = Category.new
+  def update
+    @category = Category.update(category_params)
+    if @category.save
+      flash[:success] = "#{@category.title} updated!"
+      redirect category_path(@category)
+    else
+      render :edit
+    end
   end
 
-  def create
-
-  end
 
   def destroy
-    #get specific category, perform destroy functionality
-    # return to category index with updated index
+    category = Category.find(params[:id])
+    category.destroy
+
+    flash[:success] = "#{category.title} was successfully deleted!"
+      redirect_to categories_path
   end
 
   private

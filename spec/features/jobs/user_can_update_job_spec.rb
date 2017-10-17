@@ -15,7 +15,7 @@ describe 'User can edit /companies/id/jobs/id/edit' do
 
     fill_in('job[title]', with: "Teach g0d")
     fill_in('job[description]', with: "God of Turing")
-    fill_in('job[level_of_interest]', with: 88)
+    fill_in('job[level_of_interest]', with: "88")
     fill_in('job[city]', with: "Man Jose")
 
     click_button("Submit")
