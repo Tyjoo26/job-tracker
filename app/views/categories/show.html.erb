@@ -1,3 +1,9 @@
 <h2><%= @category.title %> </h2>
+<% @category.jobs.each do |job| %>
+<ul><%= job.title %></ul>
+<ul><%= job.description %></ul>
+<ul><%= job.level_of_interest %></ul>
+<ul><%= job.city %></ul>
+<% end %>
 
 <p><%= link_to "Go Back to Categories Index", categories_path %> </p>

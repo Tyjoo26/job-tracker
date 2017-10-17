@@ -14,7 +14,7 @@ describe 'user sees all jobs in a show page for category' do
     expect(page).to have_content("Developer")
     expect(page).to have_content("Code Ninja")
 
-    click_button("Go Back to All Categories")
+    click_link("Go Back to Categories Index")
     expect(current_path).to eq(categories_path)
   end
 
