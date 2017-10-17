@@ -1,12 +1,12 @@
 class CategoriesController < ApplicationController
 
   def index
-    @companies = Company.all
+    @company = Company.find(params[:company_id])
     @jobs = Job.all
   end
 
   def show
-    #show specific category , they see a list of jobs associated with that category
+    @category = Category.find(params[:id])
   end
 
 
@@ -26,6 +26,12 @@ class CategoriesController < ApplicationController
   def destroy
     #get specific category, perform destroy functionality
     # return to category index with updated index
+  end
+
+  private
+
+  def category_params
+    params.require(:category).permit(:title)
   end
 
 

@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+
+
   def index
     @company = Company.find(params[:company_id])
     @jobs = @company.jobs
@@ -21,35 +23,31 @@ class JobsController < ApplicationController
   end
 
   def show
-    @company = Company.find(params[:company_id])
-    @job = @company.jobs.find(params[:id])
-    redirect_to job_path(job)
+    @job = Job.find(params[:id])
   end
 
   def edit
     @company = Company.find(params[:company_id])
-    @job = @company.jobs.find(params[:id])
+    @job = Job.find(params[:id])
   end
 
   def update
     @company = Company.find(params[:company_id])
-    @job = @company.jobs.find(params[:id])
-    @job.update(params[:id], job_params)
+    @job = @company.job.update(jobs_params)
     if @job.save
       flash[:success] = "#{@job.title} updated!"
-      redirect_to job_path(@job)
+      redirect_to company_job_path(@job)
     else
       render :edit
     end
   end
 
   def destroy
-    @company = Company.find(params[:company_id])
-    job = @company.jobs.find(params[:id])
+    job = Job.find(params[:id])
     job.destroy
 
-    flash[:success] = "#{job.title} deleted!"
-    redirect_to jobs_path
+    flash[:success] = "#{job.title} was successfully deleted!"
+    redirect_to company_jobs_path(job.company_id)
   end
 
   private
@@ -57,4 +55,6 @@ class JobsController < ApplicationController
   def job_params
     params.require(:job).permit(:title, :description, :level_of_interest, :city)
   end
+
+
 end
