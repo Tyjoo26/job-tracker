@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20171018222436) do
     t.text "full_name"
     t.text "position"
     t.text "email"
-    t.text "company"
     t.bigint "company_id"
     t.index ["company_id"], name: "index_contacts_on_company_id"
   end

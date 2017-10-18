@@ -1,11 +1,9 @@
 class ContactsController < ApplicationController
 
   def create
-
     @company = Company.find(params[:company_id])
-
-    @contact = @company.contacts.new(contact_params)
-
+    @contact = @company.contacts.create(contact_params)
+    
     if @contact.save
       flash[:success] = "You've successfully saved a contact"
       redirect_to company_path(@company)
@@ -20,7 +18,7 @@ class ContactsController < ApplicationController
   private
 
   def contact_params
-    params.require(:contact).permit(:full_name, :position, :email)
+    params.require(:contact).permit(:full_name, :position, :email, :company_id)
   end
 
 end
