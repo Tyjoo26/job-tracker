@@ -8,4 +8,10 @@ City: <%= @job.city %>
 <br>
 Company: <%= link_to @job.company.name, company_path(@job.company) %>
 <br>
+<%@job.comments.reverse_each do |comment| %>
+<li>Comments: <%= comment.body %> </li>
+<% end %>
+
+<%= render partial: "/comments/form" %>
+
 <%= link_to "Go Back to All Companies", companies_path %>

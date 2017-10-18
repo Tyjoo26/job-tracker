@@ -3,3 +3,11 @@ All Jobs for <strong><%= @company.name %></strong>
 <% @company.jobs.each do |job| %>
   <ul><%= job.title %></ul>
 <% end %>
+
+<% @company.comments.each do |comment| %>
+<li><%= comment.full_name %> </li>
+<li><%= comment.position %> %> </li>
+<li><%= comment.email %>  </li>
+<% end %>
+
+<%= render :partial "/contacts/form" %>
