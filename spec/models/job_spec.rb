@@ -39,4 +39,21 @@ describe Job do
       expect(job).to respond_to(:company)
     end
   end
+
+  describe '.count_of_jobs_by_level_of_interest' do
+    it "returns count of jobs with specific level of interest for one job" do
+      category = Category.create!(title: "HR")
+      company = Company.create!(name: "ESPN")
+      job = Job.create!(title: "Software", level_of_interest: 70, description: "Wahoo", city: "Denver", category: category, company: company)
+      expect(Job.count_of_jobs_by_level_of_interest).to eq({70 => 1})
+    end
+
+    it "retuns count of jobs by level of interest for two different jobs" do
+      category = Category.create!(title: "HR")
+      company = Company.create!(name: "ESPN")
+      job1 = Job.create!(title: "Software", level_of_interest: 70, description: "Wahoo", city: "Denver", category: category, company: company)
+      job2 = Job.create!(title: "Software", level_of_interest: 4, description: "Wahoo", city: "Denver", category: category, company: company)
+      expect(Job.count_of_jobs_by_level_of_interest).to eq({job1.level_of_interest => 1, job2.level_of_interest => 1})
+    end
+  end
 end
