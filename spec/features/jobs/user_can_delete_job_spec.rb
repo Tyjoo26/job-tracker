@@ -8,13 +8,13 @@ describe "As a user" do
         @company = Company.create!(name: "ESPN")
         @job = @company.jobs.create!(title: "Developer", description: "So hot right now...so hot", level_of_interest: 70, city: "Denver")
 
-        visit company_jobs_path
+        visit company_jobs_path(@company)
       end
       it "deletes the job when I click the delete job, and it displays the index without that job" do
         expect(page).to have_content("Developer")
 
         click_on("Delete")
-        expect(page).to_not have_no_content("Denver")
+        expect(page).to have_no_content("Denver")
       end
     end
   end
