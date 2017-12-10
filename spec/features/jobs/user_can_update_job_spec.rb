@@ -18,6 +18,8 @@ describe "As a user" do
       click_button "Submit"
 
       expect(current_path).to eq("/companies/#{@company.id}/jobs/#{@job.id}")
+
+      expect(page).to have_content(80)
     end
   end
 end
